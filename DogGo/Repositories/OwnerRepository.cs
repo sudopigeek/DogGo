@@ -106,12 +106,12 @@ namespace DogGo.Repositories
                     ";
 
                     cmd.Parameters.AddWithValue("@id", id);
-
+                    Owner owner = null;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            Owner owner = new Owner
+                            owner = new Owner
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Name = reader.GetString(reader.GetOrdinal("Name")),
@@ -123,13 +123,14 @@ namespace DogGo.Repositories
                                 Dogs = GetDogs(reader.GetInt32(reader.GetOrdinal("Id")))
                             };
 
-                            return owner;
+                            //return owner;
                         }
-                        else
-                        {
-                            return null;
-                        }
+                        //else
+                        //{
+                        //    return null;
+                        //}
                     }
+                    return owner;
                 }
             }
         }
